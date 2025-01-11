@@ -69,18 +69,30 @@ function drawVector(v: Vector3, color: string, ctx: CanvasRenderingContext2D) {
 
 function handleDrawEvent() {
   // get inputs
-  const v1xButton = document.getElementById("v1x") as HTMLInputElement | null;
-  const v1yButton = document.getElementById("v1y") as HTMLInputElement | null;
-  if (!v1xButton || !v1yButton) {
+  const v1xInput = document.getElementById("v1x") as HTMLInputElement | null;
+  const v1yInput = document.getElementById("v1y") as HTMLInputElement | null;
+  if (!v1xInput || !v1yInput) {
     console.error("Couldn't find elements v1x and v1y");
     return;
   }
 
-  const v1x = Number(v1xButton.value);
-  const v1y = Number(v1yButton.value);
+  const v2xInput = document.getElementById("v2x") as HTMLInputElement | null;
+  const v2yInput = document.getElementById("v2y") as HTMLInputElement | null;
+  if (!v2xInput || !v2yInput) {
+    console.error("Couldn't find elements v2x and v2y");
+    return;
+  }
 
+  // configure vectors
+  const v1x = Number(v1xInput.value);
+  const v1y = Number(v1yInput.value);
   let v1 = new Vector3([v1x, v1y, 0]);
 
+  const v2x = Number(v2xInput.value);
+  const v2y = Number(v2yInput.value);
+  let v2 = new Vector3([v2x, v2y, 0]);
+
+  // get the canvas
   const canvasResult = getCanvasAndContext();
   if (canvasResult == undefined) {
     console.log("Failed to retrieve canvas and context.");
@@ -88,8 +100,10 @@ function handleDrawEvent() {
   }
   const { canvas, context: ctx } = canvasResult;
 
+  // draw
   clearCanvas(canvas, ctx);
   drawVector(v1, "red", ctx);
+  drawVector(v2, "blue", ctx);
 }
 
 main();
