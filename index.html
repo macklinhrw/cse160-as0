@@ -6,21 +6,50 @@
     <title>Assignment 0</title>
     <link href="./style.css" rel="stylesheet" />
   </head>
-  <body class="min-h-screen bg-slate-500 text-gray-50">
+  <body class="min-h-screen bg-slate-700 text-gray-50">
     <main class="p-4">
-      <div class="flex items-center justify-center">
-        <canvas
-          class="rounded border-2 border-dotted bg-black border-white"
-          id="example"
-          width="400"
-          height="400"
-        >
-          Please use a browser that supports "canvas"
-        </canvas>
-      </div>
       <script src="asg0.ts" type="module"></script>
       <script src="lib/cuon-matrix-cse160.js" type="module"></script>
-      <div class="text-3xl font-semibold text-center p-4">Hello World</div>
+      <div class="flex max-w-lg mx-auto items-center justify-center">
+        <div class="flex flex-col">
+          <canvas
+            class="rounded border-2 bg-black border-gray-400"
+            id="example"
+            width="400"
+            height="400"
+          >
+            Please use a browser that supports "canvas"
+          </canvas>
+          <div class="flex flex-col py-4 space-y-4">
+            <div class="flex space-x-2">
+              <span>v1:</span>
+              <label for="v1x">x</label>
+              <input
+                type="number"
+                name="v1x"
+                id="v1x"
+                value="2.25"
+                class="bg-gray-500 p-1 rounded ring-0"
+              />
+              <label for="v1y">y</label>
+              <input
+                type="number"
+                name="v1y"
+                id="v1y"
+                value="2.25"
+                class="bg-gray-500 p-1 rounded ring-0"
+              />
+            </div>
+            <input
+              id="draw"
+              type="button"
+              name="draw"
+              value="Draw"
+              class="bg-gray-500 px-4 py-1 rounded hover:bg-gray-600 hover:cursor-pointer"
+            />
+          </div>
+        </div>
+      </div>
     </main>
   </body>
 </html>
