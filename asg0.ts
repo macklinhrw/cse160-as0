@@ -6,10 +6,12 @@ function main() {
   // on click listener
   const drawButton = document.getElementById("draw");
   drawButton?.addEventListener("click", handleDrawEvent);
+  const drawOperationButton = document.getElementById("drawop");
+  drawOperationButton?.addEventListener("click", handleDrawOperationEvent);
 
   const canvasResult = getCanvasAndContext();
   if (canvasResult == undefined) {
-    console.log("Failed to retrieve canvas and context.");
+    console.error("Failed to retrieve canvas and context.");
     return;
   }
   const { canvas, context: ctx } = canvasResult;
@@ -27,14 +29,14 @@ function main() {
 const getCanvasAndContext = () => {
   var canvas = document.getElementById("example") as HTMLCanvasElement | null;
   if (!canvas) {
-    console.log("Failed to retrieve the <canvas> element");
+    console.error("Failed to retrieve the <canvas> element");
     return;
   }
 
   // Get the rendering context for 2DCG
   var ctx = canvas.getContext("2d");
   if (!ctx) {
-    console.log("Failed to retrieve the rendering context");
+    console.error("Failed to retrieve the rendering context");
     return;
   }
 
@@ -95,7 +97,7 @@ function handleDrawEvent() {
   // get the canvas
   const canvasResult = getCanvasAndContext();
   if (canvasResult == undefined) {
-    console.log("Failed to retrieve canvas and context.");
+    console.error("Failed to retrieve canvas and context.");
     return;
   }
   const { canvas, context: ctx } = canvasResult;
@@ -104,6 +106,99 @@ function handleDrawEvent() {
   clearCanvas(canvas, ctx);
   drawVector(v1, "red", ctx);
   drawVector(v2, "blue", ctx);
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
+function handleDrawOperationEvent() {
+  // === Same code from handleDrawEvent ===
+  // get inputs
+  const v1xInput = document.getElementById("v1x") as HTMLInputElement | null;
+  const v1yInput = document.getElementById("v1y") as HTMLInputElement | null;
+  if (!v1xInput || !v1yInput) {
+    console.error("Couldn't find elements v1x and v1y");
+    return;
+  }
+
+  const v2xInput = document.getElementById("v2x") as HTMLInputElement | null;
+  const v2yInput = document.getElementById("v2y") as HTMLInputElement | null;
+  if (!v2xInput || !v2yInput) {
+    console.error("Couldn't find elements v2x and v2y");
+    return;
+  }
+
+  // configure vectors
+  const v1x = Number(v1xInput.value);
+  const v1y = Number(v1yInput.value);
+  let v1 = new Vector3([v1x, v1y, 0]);
+
+  const v2x = Number(v2xInput.value);
+  const v2y = Number(v2yInput.value);
+  let v2 = new Vector3([v2x, v2y, 0]);
+  // ======
+
+  // get operation inputs
+  const opSelect = document.getElementById(
+    "op-select"
+  ) as HTMLSelectElement | null;
+  const scalarInput = document.getElementById(
+    "scalar"
+  ) as HTMLInputElement | null;
+  if (!opSelect || !scalarInput) {
+    console.error("Couldn't find elements op-select and scalar");
+    return;
+  }
+
+  // configure values
+  const op = opSelect.value;
+  const scalar = Number(scalarInput.value);
+
+  // configure vectors, create copies to not modify the originals
+  let v1copy = new Vector3();
+  v1copy.set(v1);
+  let v2copy = new Vector3();
+  v2copy.set(v2);
+
+  let v3: Vector3 | null = null;
+  let v4: Vector3 | null = null;
+
+  switch (op) {
+    case "add":
+      v3 = v1copy.add(v2);
+      break;
+    case "sub":
+      v3 = v1copy.sub(v2);
+      break;
+    case "div":
+      v3 = v1copy.div(scalar);
+      v4 = v2copy.div(scalar);
+      break;
+    case "mul":
+      v3 = v1copy.mul(scalar);
+      v4 = v2copy.mul(scalar);
+      break;
+    default:
+      console.error("No operation was detected, something went wrong.");
+      break;
+  }
+
+  // get the canvas
+  const canvasResult = getCanvasAndContext();
+  if (canvasResult == undefined) {
+    console.error("Failed to retrieve canvas and context.");
+    return;
+  }
+  const { canvas, context: ctx } = canvasResult;
+
+  // draw
+  clearCanvas(canvas, ctx);
+  drawVector(v1, "red", ctx);
+  drawVector(v2, "blue", ctx);
+  if (v3 != null) {
+    drawVector(v3, "green", ctx);
+  }
+  if (v4 != null) {
+    drawVector(v4, "green", ctx);
+  }
 }
 
 main();
