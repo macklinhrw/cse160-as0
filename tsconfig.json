@@ -22,5 +22,5 @@
     /* Extra */
     "allowJs": true
   },
-  "include": ["src"]
+  "include": ["./asg0.ts"]
 }
