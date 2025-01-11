@@ -17,17 +17,27 @@ function main() {
   }
 
   // Draw a blue rectangle                                   <- (3)
-  let v1 = new Vector3([0, 0, 0]);
-  console.log(v1);
+  let v1 = new Vector3([2.25, 2.25, 0]);
   drawVector(v1, "red", ctx);
 
   // ctx.fillStyle = "rgba(0, 0, 255, 1.0)"; // Set a blue color
   // ctx.fillRect(120, 10, 150, 150); // Fill a rectangle with the color
 }
 
+// References:
+// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke
+// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo
 function drawVector(v: Vector3, color: string, ctx: CanvasRenderingContext2D) {
-  ctx.fillStyle = color;
-  ctx.lineTo(v.elements[0] * 0, v.elements[1] * 20);
+  ctx.strokeStyle = color;
+  ctx.beginPath(); // Start a new path
+  // Center of canvas
+  let centerX = 200;
+  let centerY = 200;
+  ctx.moveTo(centerX, centerY);
+  // NOTE: 0,0 is in topleft
+  // Add centerX, subtract centerY
+  ctx.lineTo(centerX + v.elements[0] * 20, centerY - v.elements[1] * 20);
+  ctx.stroke();
 }
 
 main();
