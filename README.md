@@ -1,6 +1,6 @@
 # Assignment 0
 
-## Setup
+## Vite Setup
 
 `pnpm create vite as0 -- --template vanilla-ts`
 
