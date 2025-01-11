@@ -2,21 +2,21 @@ import { Vector3 } from "./lib/cuon-matrix-cse160";
 
 // DrawRectangle.js
 function main() {
-  // Retrieve <canvas> element                                <- (1)
+  // Retrieve <canvas> element
   var canvas = document.getElementById("example") as HTMLCanvasElement;
   if (!canvas) {
     console.log("Failed to retrieve the <canvas> element");
     return;
   }
 
-  // Get the rendering context for 2DCG                      <- (2)
+  // Get the rendering context for 2DCG
   var ctx = canvas.getContext("2d");
   if (!ctx) {
     console.log("Failed to retrieve the rendering context");
     return;
   }
 
-  // Draw a blue rectangle                                   <- (3)
+  // draw vector
   let v1 = new Vector3([2.25, 2.25, 0]);
   drawVector(v1, "red", ctx);
 
