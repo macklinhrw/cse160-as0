@@ -10,8 +10,8 @@
     <main class="p-4">
       <script src="asg0.ts" type="module"></script>
       <script src="lib/cuon-matrix-cse160.js" type="module"></script>
-      <div class="flex max-w-lg mx-auto items-center justify-center">
-        <div class="flex flex-col">
+      <div class="flex">
+        <div class="flex flex-col mx-auto">
           <div class="flex mx-auto">
             <canvas
               class="rounded border-2 bg-black border-gray-400"
@@ -75,7 +75,7 @@
               <select
                 name="operation"
                 id="op-select"
-                class="bg-gray-500 p-1 rounded"
+                class="bg-gray-500 p-1 rounded w-32"
               >
                 <option value="add">Add</option>
                 <option value="sub">Subtract</option>
@@ -83,6 +83,7 @@
                 <option value="mul">Multiply</option>
                 <option value="mag">Magnitude</option>
                 <option value="norm">Normalize</option>
+                <option value="ang">Angle Between</option>
               </select>
               <label for="scalar" class="font-bold">Scalar</label>
               <input

@@ -186,6 +186,14 @@ function handleDrawOperationEvent() {
       v3 = v1copy.normalize();
       v4 = v2copy.normalize();
       break;
+    case "ang":
+      const dot = Vector3.dot(v1copy, v2copy);
+      const angleRads = Math.acos(
+        dot / (v1copy.magnitude() * v2copy.magnitude())
+      );
+      const angle = (angleRads * 180) / Math.PI;
+      console.log("Angle:", angle);
+      break;
     default:
       console.error("No operation was detected, something went wrong.");
       break;
