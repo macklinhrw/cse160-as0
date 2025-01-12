@@ -187,12 +187,12 @@ function handleDrawOperationEvent() {
       v4 = v2copy.normalize();
       break;
     case "ang":
-      const dot = Vector3.dot(v1copy, v2copy);
-      const angleRads = Math.acos(
-        dot / (v1copy.magnitude() * v2copy.magnitude())
-      );
-      const angle = (angleRads * 180) / Math.PI;
+      const angle = angleBetween(v1copy, v2copy);
       console.log("Angle:", angle);
+      break;
+    case "area":
+      const area = areaTriangle(v1copy, v2copy);
+      console.log("Area of the triangle:", area);
       break;
     default:
       console.error("No operation was detected, something went wrong.");
@@ -217,6 +217,19 @@ function handleDrawOperationEvent() {
   if (v4 != null) {
     drawVector(v4, "green", ctx);
   }
+}
+
+function angleBetween(v1: Vector3, v2: Vector3) {
+  const dot = Vector3.dot(v1, v2);
+  const angleRads = Math.acos(dot / (v1.magnitude() * v2.magnitude()));
+  const angle = (angleRads * 180) / Math.PI;
+  return angle;
+}
+
+function areaTriangle(v1: Vector3, v2: Vector3) {
+  const cross = Vector3.cross(v1, v2);
+  // its length is equal to the area of the parallelogram
+  return cross.magnitude() / 2;
 }
 
 main();
