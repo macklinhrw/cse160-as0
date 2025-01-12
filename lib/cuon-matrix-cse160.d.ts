@@ -11,6 +11,8 @@ export class Vector3 {
   sub(other: Vector3): Vector3;
   div(scalar: number): Vector3;
   mul(scalar: number): Vector3;
+  magnitude(): Vector3;
+  normalize(): Vector3;
 }
 
 export class Vector4 {

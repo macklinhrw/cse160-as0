@@ -176,6 +176,16 @@ function handleDrawOperationEvent() {
       v3 = v1copy.mul(scalar);
       v4 = v2copy.mul(scalar);
       break;
+    case "mag":
+      let m1 = v1copy.magnitude();
+      let m2 = v2copy.magnitude();
+      console.log("Magnitude v1:", m1);
+      console.log("Magnitude v2:", m2);
+      return; // Return here, no drawing
+    case "norm":
+      v3 = v1copy.normalize();
+      v4 = v2copy.normalize();
+      break;
     default:
       console.error("No operation was detected, something went wrong.");
       break;
